@@ -8,11 +8,29 @@ import {sliderData} from "./slider-data";
 const Slider = () => {
 
     const [currentSlide, setCurrentSlide] = useState(0); 
+    const slideLength = sliderData.length; 
+
+
+    const nextSlide = () => {
+
+        setCurrentSlide(currentSlide === slideLength - 1 ? 0 : currentSlide + 1);
+        console.log('next slide');
+
+    }; 
+
+    const prevSlide = () => {
+        setCurrentSlide(currentSlide === 0 ? slideLength - 1 : currentSlide - 1); 
+    }
+
+    useEffect(() => {
+        setCurrentSlide(0); 
+    },[])
+
 
     return (
         <div className="slider">
-            <AiOutlineArrowLeft className="arrow prev" />
-            <AiOutlineArrowRight className="arrow next" />
+            <AiOutlineArrowLeft className="arrow prev" onClick={prevSlide} />
+            <AiOutlineArrowRight className="arrow next" onClick={nextSlide} />
 
             {sliderData.map((slide, index) => {
 
